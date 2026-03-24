@@ -9,7 +9,8 @@ def index():
     link += "<a href=/today>今天日期</a><hr>" 
     link += "<a href=/about>關於彥璋</a><hr>"
     link += "<a href=/welcome?u=彥璋&dep=靜宜資管>GET傳</a><hr> "
-    link += "<a href=/account>POST傳值(帳號密碼)</a><hr> " 
+    link += "<a href=/account>POST傳值(帳號密碼)</a><hr> "
+    link += "<a href=/math>簡易計算機</a><hr> " 
     return link                               
 
 @app.route("/mis")
@@ -44,6 +45,30 @@ def account():
         return result
     else:
         return render_template("account.html")
+        
+@app.route("/math", methods=["GET", "POST"])
+def math():
+    if request.method == "POST":
+        # 接收表單傳來的資料
+        x = int(request.form["x"])
+        opt = request.form["opt"]
+        y = int(request.form["y"])
+        
+        # 你的計算邏輯
+        if opt == "/" and y == 0:
+            result = "除數不能等於0"
+        else:
+            match opt:
+                case "+": result = x + y
+                case "-": result = x - y
+                case "*": result = x * y
+                case "/": result = x / y
+        
+        # 將結果傳回給同一個頁面顯示
+        return render_template("math.html", x=x, opt=opt, y=y, result=result)
+    else:
+        # 如果是 GET 請求，就只顯示空白表單
+        return render_template("math.html")
 
 if __name__ == "__main__":
     app.run()
