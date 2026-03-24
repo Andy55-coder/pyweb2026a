@@ -8,7 +8,8 @@ def index():
     link += "<a href=/mis>課程</a><hr>" 
     link += "<a href=/today>今天日期</a><hr>" 
     link += "<a href=/about>關於彥璋</a><hr>"
-    link += "<a href=/welcome?u=彥璋&dep=靜宜資管>GET傳</a><hr> "  
+    link += "<a href=/welcome?u=彥璋&dep=靜宜資管>GET傳</a><hr> "
+    link += "<a href=/account>POST傳值(帳號密碼)</a><hr> " 
     return link                               
 
 @app.route("/mis")
